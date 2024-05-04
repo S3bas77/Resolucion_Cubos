@@ -1,0 +1,24 @@
+V
+V C N
+V V V
+V C V
+R
+N V R
+R R R
+R R R
+A
+A A A
+A A A
+A A A
+B
+B B B
+B B B
+B B B
+N
+C R C
+N N N
+N N N
+C
+R N V
+C C C
+C V C
