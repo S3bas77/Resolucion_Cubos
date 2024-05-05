@@ -1,0 +1,30 @@
+Cara: Celeste
+C C C 
+C C C 
+R R R 
+
+Cara: Naranja
+N N N 
+N N N 
+C C C 
+
+Cara: Blanco
+B B B 
+B B B 
+B B B 
+
+Cara: Amarillo
+A A A 
+A A A 
+A A A 
+
+Cara: Rojo
+R R R 
+R R R 
+V V V 
+
+Cara: Verde
+V V V 
+V V V 
+N N N 
+
