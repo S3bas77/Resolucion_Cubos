@@ -53,7 +53,18 @@ Face rotate_90_degreesA(const Face& face){
     }
     return rotated_face;
 }
+void U(unordered_map<string, Face>& cube) {
+    // Rotar la cara superior (Amarillo) 90 grados en sentido horario
+    cube["Amarillo"] = rotate_90_degrees(cube["Amarillo"]);
 
+    // Ajustar las filas superiores entre caras afectadas por el movimiento "U"
+    vector<char> tmp = cube["Naranja"][0];  // Fila superior de la cara naranja
+
+    cube["Naranja"][0] = cube["Celeste"][0];  // Fila superior de celeste a naranja
+    cube["Celeste"][0] = cube["Rojo"][0];  // Fila superior de rojo a celeste
+    cube["Rojo"][0] = cube["Verde"][0];  // Fila superior de Verde a rojo
+    cube["Verde"][0] = tmp;  // Fila superior de naranja a Verde
+}
 // Aplicar el movimiento "B" (rotación de la cara posterior)
 void D(unordered_map<string, Face>& cube) {
     // Rotar la cara inferior (Blanco) 90 grados en sentido horario
@@ -67,7 +78,18 @@ void D(unordered_map<string, Face>& cube) {
     cube["Celeste"][2] = cube["Naranja"][2];  // Fila inferior de naranja a celeste
     cube["Naranja"][2] = tmp;  // Fila inferior de verde a naranja
 }
+void Up(unordered_map<string, Face>& cube) {
+    // Rotar la cara superior (Amarillo) 90 grados en sentido horario
+    cube["Amarillo"] = rotate_90_degrees(cube["Amarillo"]);
 
+    // Ajustar las filas superiores entre caras afectadas por el movimiento "U"
+    vector<char> tmp = cube["Rojo"][0];  // Fila superior de la cara naranja
+
+    cube["Rojo"][0] = cube["Celeste"][0];  // Fila superior de celeste a Rojo
+    cube["Celeste"][0] = cube["Naranja"][0];  // Fila superior de Naranja a celeste
+    cube["Naranja"][0] = cube["Verde"][0];  // Fila superior de Verde a rojo
+    cube["Verde"][0] = tmp;  // Fila superior de naranja a Verde
+}
 void Dp(unordered_map<string, Face>& cube) {
     // Rotar la cara inferior (Blanco) 90 grados en sentido antihorario
     cube["Blanco"] = rotate_90_degreesA(cube["Blanco"]);  // Usar rotación antihoraria
@@ -80,7 +102,6 @@ void Dp(unordered_map<string, Face>& cube) {
     cube["Celeste"][2] = cube["Rojo"][2];  // Fila inferior de rojo a celeste
     cube["Rojo"][2] = tmp;  // Fila inferior de verde a rojo
 }
-
 // Función para imprimir todas las caras del cubo
 void print_rubik_faces(const unordered_map<string, Face>& cube) {
     for (const auto& [name, face] : cube) {
@@ -100,8 +121,9 @@ int main() {
     output;
     
     unordered_map<string, Face> cube = read_rubik_faces();  // Leer las caras del cubo desde el input
-    Dp(cube);
-    // Imprimir todas las caras para verificar el estado del cubo
-    print_rubik_faces(cube); 
+    cout<<"horario"<<endl;
+    U(cube);
+    print_rubik_faces(cube);
+
     return 0;
 }

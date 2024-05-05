@@ -1,12 +1,44 @@
+anti-horario
+Cara: Celeste
+N N N 
+C C C 
+C C C 
+
+Cara: Naranja
+V V V 
+N N N 
+N N N 
+
+Cara: Blanco
+B B B 
+B B B 
+B B B 
+
+Cara: Amarillo
+A A A 
+A A A 
+A A A 
+
+Cara: Rojo
+C C C 
+R R R 
+R R R 
+
+Cara: Verde
+R R R 
+V V V 
+V V V 
+
+horario
 Cara: Celeste
 C C C 
 C C C 
-R R R 
+C C C 
 
 Cara: Naranja
 N N N 
 N N N 
-C C C 
+N N N 
 
 Cara: Blanco
 B B B 
@@ -21,10 +53,10 @@ A A A
 Cara: Rojo
 R R R 
 R R R 
-V V V 
+R R R 
 
 Cara: Verde
 V V V 
 V V V 
-N N N 
+V V V 
 
