@@ -9,9 +9,9 @@ A N N
 A N N 
 
 Cara: Blanco
-B B B 
-B B B 
 N N N 
+B B B 
+B B B 
 
 Cara: Amarillo
 A A A 
@@ -26,5 +26,5 @@ R R B
 Cara: Verde
 V V V 
 V V V 
-V V C 
+V V V 
 

@@ -91,7 +91,10 @@ void F(unordered_map<string, Face>& cubo) {
     for (int i = 0; i < 3; ++i) {
         tmp[i] = cubo["Naranja"][i][2];
     }
-
+    vector<char> tmb(3);
+    for (int i = 0; i < 3; ++i) {
+        tmp[i] = cubo["Naranja"][i][2];
+    }
     // Ajustar las columnas entre caras afectadas por el movimiento "R"
     for (int i = 0; i < 3; ++i) {
         cubo["Naranja"][i][0] = cubo["Amarillo"][i][0];  // De Blanco a Verde
@@ -100,8 +103,7 @@ void F(unordered_map<string, Face>& cubo) {
     for (int i = 0; i < 3; ++i) {
         cubo["Rojo"][i][2] = cubo["Blanco"][i][2];  // De Naranja a Amarillo
     }
-    
-    cubo["Blanco"][2] = tmp;  // De Verde a Naranja
+    cubo["Blanco"][0] = tmp;  // De Verde a Naranja
 }
 void U(unordered_map<string, Face>& cubo) {
     // Rotar la cara superior (Amarillo) 90 grados en sentido horario
@@ -166,7 +168,6 @@ void imprimir_caras_cubo(const unordered_map<string, Face>& cubo) {
         cout << endl;
     }
 }
-
 int main() {
     input;  
     output;
