@@ -159,5 +159,5 @@ int main() {
     
     find_white_cross(cube);  // Resolver la cruz blanca usando BFS
 
-    return 0;//hola
+    return 0;
 }
