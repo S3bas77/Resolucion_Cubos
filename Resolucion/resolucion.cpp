@@ -1,7 +1,4 @@
-#include <iostream>
-#include <unordered_map>
-#include <vector>
-#include <string>
+#include<bits/stdc++.h>
 #include "movimientos.cpp"
 
 using namespace std;
@@ -90,7 +87,6 @@ vector<string> solve(const Cube& cube) {
 
 int main() {
     input;
-    output;
     // Aquí deberías leer el cubo desde la entrada
     // Luego, convierte el unordered_map en un objeto Cube
     unordered_map<string, Face> cubo = leer_caras_cubo();
