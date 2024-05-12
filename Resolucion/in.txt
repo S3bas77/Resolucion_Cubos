@@ -1,24 +1,18 @@
 V
-V V V
-V V V
-V V V
+V C
+V C
 R
-R R R
-R R R
-R R R
+B B
+A A
 A
-A A A
-A A A
-A A A
+R N
+R N
 B
-B B B
-B B B
-B B B
+A A
+B B 
 N
-N N N
-N N N
-N N N
+R N 
+R N 
 C
-C C C
-C C C
-C C C
+V C
+V C
