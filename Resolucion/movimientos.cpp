@@ -46,55 +46,51 @@ Face rotacion_antihoraria(const Face& face){
 }
 void R(unordered_map<string, Face>& cubo) {
     cubo["Naranja"] = rotacion_horaria(cubo["Naranja"]); 
-    vector<char> tmp(2);
-    for (int i = 0; i < 2; ++i) {
-        tmp[i] = cubo["Verde"][i][1];
-    }
-    for (int i = 0; i < 2; ++i) {
-        cubo["Verde"][i][1] = cubo["Blanco"][i][1];  
-        cubo["Blanco"][i][1] = cubo["Celeste"][i][1]; 
-        cubo["Celeste"][i][1] = cubo["Amarillo"][i][1];  
-        cubo["Amarillo"][i][1] = tmp[i];  
-    }
+    cubo["Verde"][0][1] = cubo["Blanco"][0][1];   
+    cubo["Verde"][1][1] = cubo["Blanco"][1][1];  
+    cubo["Blanco"][0][1] = cubo["Celeste"][1][0]; 
+    cubo["Blanco"][1][1] = cubo["Celeste"][0][0]; 
+    cubo["Celeste"][0][0] = cubo["Amarillo"][1][1];  
+    cubo["Celeste"][1][0] = cubo["Amarillo"][0][1];  
+    cubo["Amarillo"][0][1] = cubo["Verde"][0][1];  
+    cubo["Amarillo"][1][1] = cubo["Verde"][1][1];  
 }
 void Rp(unordered_map<string, Face>& cubo) {
     cubo["Naranja"] = rotacion_antihoraria(cubo["Naranja"]);
-    vector<char> tmp(2);
-    for (int i = 0; i < 2; ++i) {
-        tmp[i] = cubo["Verde"][i][1];
-    }
-    for (int i = 0; i < 2; ++i) {
-        cubo["Verde"][i][1] = cubo["Amarillo"][i][1];  
-        cubo["Amarillo"][i][1] = cubo["Celeste"][i][1];  
-        cubo["Celeste"][i][1] = cubo["Blanco"][i][1];
-        cubo["Blanco"][i][1] = tmp[i];  
-    }
+
+    cubo["Verde"][0][1] = cubo["Amarillo"][0][1];  
+    cubo["Verde"][1][1] = cubo["Amarillo"][1][1];  
+    cubo["Amarillo"][0][1] = cubo["Celeste"][1][0];  
+    cubo["Amarillo"][1][1] = cubo["Celeste"][0][0];
+    cubo["Celeste"][0][0] = cubo["Blanco"][1][1];
+    cubo["Celeste"][1][0] = cubo["Blanco"][0][1];
+    cubo["Blanco"][0][1] = cubo["Verde"][0][1];  
+    cubo["Blanco"][1][1] = cubo["Verde"][1][1]; 
 }
 void L(unordered_map<string, Face>& cubo) {
     cubo["Rojo"] = rotacion_horaria(cubo["Rojo"]); 
-    vector<char> tmp(2);
-    for (int i = 0; i < 2; ++i) {
-        tmp[i] = cubo["Verde"][i][0];
-    }
-    for (int i = 0; i < 2; ++i) {
-        cubo["Verde"][i][0] = cubo["Amarillo"][i][0];
-        cubo["Amarillo"][i][0] = cubo["Celeste"][i][0];  
-        cubo["Celeste"][i][0] = cubo["Blanco"][i][0];  
-        cubo["Blanco"][i][0] = tmp[i];  
-    }
+
+    cubo["Verde"][0][0] = cubo["Amarillo"][0][0];
+    cubo["Verde"][1][0] = cubo["Amarillo"][1][0];
+    cubo["Amarillo"][0][0] = cubo["Celeste"][1][1];  
+    cubo["Amarillo"][1][0] = cubo["Celeste"][0][1];  
+    cubo["Celeste"][0][1] = cubo["Blanco"][1][0];
+    cubo["Celeste"][1][1] = cubo["Blanco"][0][0];  
+    cubo["Blanco"][0][0] = cubo["Verde"][0][0]; 
+    cubo["Blanco"][1][0] = cubo["Verde"][1][0]; 
 }
 void Lp(unordered_map<string, Face>& cubo) {
     cubo["Rojo"] = rotacion_antihoraria(cubo["Rojo"]);  
-    vector<char> tmp(2);
-    for (int i = 0; i < 2; ++i) {
-        tmp[i] = cubo["Verde"][i][0];
-    }
-    for (int i = 0; i < 2; ++i) {
-        cubo["Verde"][i][0] = cubo["Blanco"][i][0];  
-        cubo["Blanco"][i][0] = cubo["Celeste"][i][0];
-        cubo["Celeste"][i][0] = cubo["Amarillo"][i][0]; 
-        cubo["Amarillo"][i][0] = tmp[i];  
-    }
+
+    cubo["Verde"][0][0] = cubo["Blanco"][0][0];  
+    cubo["Verde"][1][0] = cubo["Blanco"][1][0];  
+    cubo["Blanco"][0][0] = cubo["Celeste"][1][1];
+    cubo["Blanco"][1][0] = cubo["Celeste"][0][1];
+    cubo["Celeste"][0][1] = cubo["Amarillo"][1][0]; 
+    cubo["Celeste"][1][1] = cubo["Amarillo"][0][0]; 
+    cubo["Amarillo"][0][0] = cubo["Verde"][0][0]; 
+    cubo["Amarillo"][1][0] = cubo["Verde"][1][0]; 
+
 } 
 void F(unordered_map<string, Face>& cubo) {
     cubo["Verde"] = rotacion_horaria(cubo["Verde"]);
@@ -134,9 +130,8 @@ void B(unordered_map<string, Face>& cubo){
     for (int i = 0; i < 2; ++i) {
         tmp[i] = cubo["Naranja"][i][1];
     }
-    for (int i = 0; i < 2; ++i) {
-        cubo["Naranja"][i][1] = cubo["Blanco"][1][i];
-    }
+    cubo["Naranja"][0][1] = cubo["Blanco"][1][1];
+    cubo["Naranja"][1][1] = cubo["Blanco"][1][0];
     cubo["Blanco"][1][0] = cubo["Rojo"][0][0];
     cubo["Blanco"][1][1] = cubo["Rojo"][1][0];
     cubo["Rojo"][0][0] = cubo["Amarillo"][0][1];
@@ -154,7 +149,7 @@ void Bp(unordered_map<string, Face>& cubo){
     for (int i = 0; i < 2; ++i) {
         cubo["Naranja"][i][1] = cubo["Amarillo"][0][i]; 
     }
-    cubo["Amarillo"][0][0] = cubo["Rojo"][0][1];
+    cubo["Amarillo"][0][0] = cubo["Rojo"][1][0];
     cubo["Amarillo"][0][1] = cubo["Rojo"][0][0];
     for (int i = 0; i < 2; ++i) {
         cubo["Rojo"][i][0] = cubo["Blanco"][1][i];

@@ -1,18 +1,18 @@
 V
-V C
-V C
-R
 B B
-A A
+V V
+R
+A C
+R N
 A
 R N
 R N
 B
-A A
-B B 
+A R
+C N 
 N
-R N 
-R N 
+C V 
+B A 
 C
-V C
-V C
+B V
+C A
