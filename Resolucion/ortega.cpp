@@ -2,8 +2,9 @@
 #include <unordered_map>
 #include <vector>
 #include <string>
-#include "movimientos.cpp"
-
+#include <queue>
+#include "movimientos.cpp" 
+#include "OLL.cpp"
 using namespace std;
 
 // Definición de la estructura Face
@@ -22,21 +23,21 @@ struct State {
     State(const Cube& c, const string& m) : cube(c), moves(m) {}
 };
 
-bool is_solved(const Cube& cube) {
-    for (const auto& [name, face] : cube.faces) {
-        char color = face[0][0];
-        for (const auto& row : face) {
-            for (char c : row) {
-                if (c != color) {
-                    return false;
-                }
+bool is_white_solved(const Cube& cube) {
+    // Verifica si la cara blanca está resuelta
+    Face white_face = cube.faces.at("Blanco"); // Cambio aquí
+    char color = white_face[0][0];
+    for (const auto& row : white_face) {
+        for (char c : row) {
+            if (c != color) {
+                return false;
             }
         }
     }
     return true;
 }
 
-vector<string> solve(const Cube& cube) {
+vector<string> solveWhiteFace(const Cube& cube) {
     queue<State> q;
     q.push(State(cube, ""));
 
@@ -44,7 +45,7 @@ vector<string> solve(const Cube& cube) {
         State current = q.front();
         q.pop();
 
-        if (is_solved(current.cube)) {
+        if (is_white_solved(current.cube)) {
             vector<string> solution;
             for (char move : current.moves) {
                 string m(1, move);
@@ -53,8 +54,8 @@ vector<string> solve(const Cube& cube) {
             return solution;
         }
 
-        // Aplica todos los movimientos posibles
-        for (auto& move : {"R", "Rp", "L", "Lp", "F", "Fp", "B", "Bp", "U", "Up", "D", "Dp"}) {
+        // Aplica solo los movimientos que afectan a la cara blanca
+        for (auto& move : {"R", "Rp", "L", "Lp", "F", "Fp", "B", "Bp"}) {
             Cube new_cube = current.cube;
             if (move == "R") {
                 R(new_cube.faces);
@@ -72,14 +73,6 @@ vector<string> solve(const Cube& cube) {
                 B(new_cube.faces);
             } else if (move == "Bp") {
                 Bp(new_cube.faces);
-            } else if (move == "U") {
-                U(new_cube.faces);
-            } else if (move == "Up") {
-                Up(new_cube.faces);
-            } else if (move == "D") {
-                D(new_cube.faces);
-            } else if (move == "Dp") {
-                Dp(new_cube.faces);
             }
             q.push(State(new_cube, current.moves + move));
         }
@@ -90,14 +83,14 @@ vector<string> solve(const Cube& cube) {
 
 int main() {
     input;
-    output;
+     output;
     // Aquí deberías leer el cubo desde la entrada
     // Luego, convierte el unordered_map en un objeto Cube
     unordered_map<string, Face> cubo = leer_caras_cubo();
     Cube cube{cubo};
 
-    // Llama a la función solve y muestra la solución encontrada
-    vector<string> movimientos = solve(cube);
+    // Llama a la función solveWhiteFace y muestra la solución encontrada
+    vector<string> movimientos = solveWhiteFace(cube);
     cout << movimientos.size() << endl;
     for (const auto& move : movimientos) {
         cout << move << " ";
