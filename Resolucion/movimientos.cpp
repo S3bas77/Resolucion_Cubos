@@ -1,6 +1,4 @@
 #include<bits/stdc++.h>
-#define input freopen("in.txt", "r", stdin) 
-#define output freopen("out.txt", "w", stdout) 
 using namespace std;
 using Face = vector<vector<char>>;
 unordered_map<string, Face> leer_caras_cubo() {
@@ -13,18 +11,12 @@ unordered_map<string, Face> leer_caras_cubo() {
         {'C', "Celeste"}
     };
     unordered_map<string, Face> cubo;
-    for (int i = 0; i < 6; ++i) {
-        char inicial_de_la_cara;
-        cin >> inicial_de_la_cara;
-        Face face(2, vector<char>(2)); 
-        for (int fil = 0; fil < 2; fil++) { 
-            for (int col = 0; col < 2; col++) { 
-                cin >> face[fil][col];
-            }
-        }
-        cubo[mapa_color[inicial_de_la_cara]] = face;  
+    for (const auto& pair : mapa_color) {
+        char inicial_de_la_cara = pair.first;
+        Face face(2, vector<char>(2, inicial_de_la_cara));
+        cubo[pair.second] = face;
     }
-    return cubo;  
+    return cubo;
 }
 Face rotacion_horaria(const Face& face) {
     Face cara_rotada(2, vector<char>(2));
@@ -214,11 +206,3 @@ void imprimir_caras_cubo(const unordered_map<string, Face>& cubo) {
         cout << endl;
     }
 }
-//int main() {
-    //input;  
-    //output;
-    //unordered_map<string, Face> cubo = leer_caras_cubo();  
-    //Dp(cubo);
-    //imprimir_caras_cubo(cubo);
-    //return 0;
-//}
