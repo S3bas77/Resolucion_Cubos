@@ -1,83 +1,173 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <unordered_map>
+#include <vector>
+#include <string>
+#include <queue>
+#include "movimientos.cpp" 
 using namespace std;
+
+// Definición de la estructura Face
 using Face = vector<vector<char>>;
 
-void imprimir_cara(const Face& cara) {
-    for (const auto& fila : cara) {
-        for (const auto& color : fila) {
-            cout << color << " ";
-        }
-        cout << endl;
-    }
-}
+// Definición de la estructura Cube
+struct Cube {
+    unordered_map<string, Face> faces;
+};
 
-void aplicar_algoritmo(unordered_map<string, Face>& cubo, const string& algoritmo) {
-    for (char movimiento : algoritmo) {
-        switch (movimiento) {
-            case 'R':
-                // Implementa la función para aplicar R
-                break;
-            case 'L':
-                // Implementa la función para aplicar L
-                break;
-            case 'F':
-                // Implementa la función para aplicar F
-                break;
-            case 'B':
-                // Implementa la función para aplicar B
-                break;
-            case 'U':
-                // Implementa la función para aplicar U
-                break;
-            case 'D':
-                // Implementa la función para aplicar D
-                break;
-            case '\'':
-                // Implementa la función para aplicar la inversa de un movimiento
-                break;
-            case '2':
-                // Implementa la función para aplicar un doble movimiento
-                break;
+// Definición de la estructura State
+struct State {
+    Cube cube;
+    string moves;
+
+    State(const Cube& c, const string& m) : cube(c), moves(m) {}
+};
+
+bool is_yellow_solved(const Cube& cube) {
+    // Verifica si la cara blanca está resuelta
+    Face yellow_face = cube.faces.at("Amarillo"); // Cambio aquí
+    char color = yellow_face[0][0];
+    for (const auto& row : yellow_face) {
+        for (char c : row) {
+            if (c != color) {
+                return false;
+            }
         }
     }
+    return true;
 }
 
-bool verificar_cara_amarilla(const unordered_map<string, Face>& cubo) {
-    // Implementa la lógica para verificar si la cara amarilla está completa
-}
+vector<string> solveYellowFace(const Cube& cube) {
+    queue<State> q;
+    q.push(State(cube, ""));
 
-void resolver_cara_amarilla(unordered_map<string, Face>& cubo, const vector<string>& algoritmos) {
-    bool resuelto = false;
-    for (const auto& algoritmo : algoritmos) {
-        aplicar_algoritmo(cubo, algoritmo);
-        if (verificar_cara_amarilla(cubo)) {
-            resuelto = true;
-            break;
+    int shortest_solution_length = INT_MAX; // Longitud de la solución más corta encontrada
+
+    while (!q.empty()) {
+        State current = q.front();
+        q.pop();
+
+        if (current.moves.size() >= shortest_solution_length) {
+            // Si el número de movimientos realizados es igual o mayor que la solución más corta, detener la búsqueda
+            continue;
+        }
+
+        if (is_yellow_solved(current.cube)) {
+            vector<string> solution;
+            for (char move : current.moves) {
+                string m(1, move);
+                solution.push_back(m);
+            }
+            shortest_solution_length = min(shortest_solution_length, static_cast<int>(solution.size()));
+            // Actualizar la longitud de la solución más corta
+            return solution;
+        }
+
+        // Aplica solo los movimientos que afectan a la cara blanca
+        for (auto& move : {"Case1", "Case2", "Case3", "Case4", "Case5", "Case6", "Case7"}) {
+            Cube new_cube = current.cube;
+            if (move == "Case1") {
+                R(new_cube.faces);
+                U(new_cube.faces);
+                Rp(new_cube.faces);
+                U(new_cube.faces);
+                R(new_cube.faces);
+                U(new_cube.faces);
+                U(new_cube.faces);
+                Rp(new_cube.faces);
+            } else if (move == "Case2") {
+                R(new_cube.faces);
+                U(new_cube.faces);
+                U(new_cube.faces);
+                Rp(new_cube.faces);
+                Up(new_cube.faces);
+                R(new_cube.faces);
+                Up(new_cube.faces);
+                Rp(new_cube.faces);
+            } else if (move == "Case3") {
+                R(new_cube.faces);
+                R(new_cube.faces);
+                U(new_cube.faces);
+                U(new_cube.faces);
+                R(new_cube.faces);
+                U(new_cube.faces);
+                U(new_cube.faces);
+                R(new_cube.faces);
+                R(new_cube.faces);
+            } else if (move == "Case4") {
+                F(new_cube.faces);
+                R(new_cube.faces);
+                U(new_cube.faces);
+                Rp(new_cube.faces);
+                Up(new_cube.faces);
+                R(new_cube.faces);
+                U(new_cube.faces);
+                Rp(new_cube.faces);
+                Up(new_cube.faces);
+                Fp(new_cube.faces);
+            } else if (move == "Case5") {
+                F(new_cube.faces);
+                R(new_cube.faces);
+                U(new_cube.faces);
+                Rp(new_cube.faces);
+                Up(new_cube.faces);
+                Fp(new_cube.faces);
+            } else if (move == "Case6") {
+                R(new_cube.faces);
+                U(new_cube.faces);
+                Rp(new_cube.faces);
+                Up(new_cube.faces);
+                Rp(new_cube.faces);
+                F(new_cube.faces);
+                R(new_cube.faces);
+                Fp(new_cube.faces);
+            } else if (move == "Case7") {
+                F(new_cube.faces);
+                R(new_cube.faces);
+                Up(new_cube.faces);
+                Rp(new_cube.faces);
+                Up(new_cube.faces);
+                R(new_cube.faces);
+                U(new_cube.faces);
+                Rp(new_cube.faces);
+                Fp(new_cube.faces);
+            }
+            //q.push(State(new_cube, current.moves + move));
+            if (is_yellow_solved(new_cube)) {
+                vector<string> solution;
+                for (char m : current.moves) {
+                    string mv(1, m);
+                    solution.push_back(mv);
+                }
+                solution.push_back(move);
+                shortest_solution_length = min(shortest_solution_length, static_cast<int>(solution.size()));
+                // Actualizar la longitud de la solución más corta
+                return solution;
+            }
+            if (move == "Case7") { // Si es el último movimiento y no se ha resuelto, mover U
+                Cube new_cube_U = current.cube;
+                U(new_cube_U.faces); // Mover U
+                q.push(State(new_cube_U, current.moves + "U"));
+            } else {
+                q.push(State(new_cube, current.moves + move));
+            }   
         }
     }
-
-    if (!resuelto) {
-        // Si no se resuelve con los algoritmos dados, girar U y volver a intentarlo
-        // Implementa la función para girar U
-        // Vuelve a llamar a resolver_cara_amarilla con los mismos algoritmos
-    } else {
-        cout << "Cara amarilla armada exitosamente!" << endl;
-    }
+    return {}; // No se encontró solución
 }
+
 
 int main() {
-    unordered_map<string, Face> cubo; // Implementa la función para leer el estado inicial del cubo
-    vector<string> algoritmos = {
-        "R U R' U R 2U R'",
-        "R 2U R' U' R U' R'",
-        "2R 2U R 2U 2R",
-        "F R U R' U' R U R' U' F'",
-        "F R U R' U' F'",
-        "R U R' U' R' F R F'",
-        "F R U' R' U' R U R' F'"
-    };
+    input;
+    output;
+    unordered_map<string, Face> cubo = leer_caras_cubo();
+    Cube cube{cubo};
 
-    resolver_cara_amarilla(cubo, algoritmos);
-
+    // Llama a la función solveWhiteFace y muestra la solución encontrada
+    vector<string> movimientos = solveYellowFace(cube);
+    cout << movimientos.size() << endl;
+    for (const auto& move : movimientos) {
+        cout << move << " ";
+    }
+    cout << endl;
     return 0;
 }

@@ -4,7 +4,7 @@
 #include <string>
 #include <queue>
 #include "movimientos.cpp" 
-#include "OLL.cpp"
+//#include "OLL.cpp"
 using namespace std;
 
 // Definición de la estructura Face
@@ -83,7 +83,7 @@ vector<string> solveWhiteFace(const Cube& cube) {
 
 int main() {
     input;
-     output;
+    output;
     // Aquí deberías leer el cubo desde la entrada
     // Luego, convierte el unordered_map en un objeto Cube
     unordered_map<string, Face> cubo = leer_caras_cubo();
